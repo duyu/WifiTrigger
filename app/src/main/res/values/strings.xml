@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">WifiTrigger</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="preference_connect_title">When Connected</string>
+    <string name="preference_connect_sound_title">Silent</string>
+    <string name="preference_connect_sound_summary_on">Set to Silent.</string>
+    <string name="preference_connect_sound_summary_off">Do not change the sound settings.</string>
+
+    <string name="preference_disconnect_title">When DisConnected</string>
+    <string name="preference_disconnect_sound_title">Sound</string>
+    <string name="preference_disconnect_sound_summary_on">Turn On the Sound.</string>
+    <string name="preference_disconnect_sound_summary_off">Do not change the sound settings.</string>
+
+    <string name="preference_vibrate_title">Vibrator</string>
+
+</resources>

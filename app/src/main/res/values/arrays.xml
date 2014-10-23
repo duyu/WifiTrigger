@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="preferences_connected_vibrator_entries">
+        <item>ON</item>
+        <item>OFF</item>
+        <item>NO CHANGE(Default)</item>
+    </string-array>
+    <string-array name="preferences_connected_vibrator_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+
+</resources>
