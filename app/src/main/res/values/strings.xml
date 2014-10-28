@@ -10,12 +10,12 @@
     <string name="preference_connect_title">When Connected</string>
     <string name="preference_connect_sound_title">Silent</string>
     <string name="preference_connect_sound_summary_on">Set to Silent.</string>
-    <string name="preference_connect_sound_summary_off">Do not change the sound settings.</string>
+    <string name="preference_connect_sound_summary_off">NO CHANGE(Default)</string>
 
     <string name="preference_disconnect_title">When DisConnected</string>
     <string name="preference_disconnect_sound_title">Sound</string>
     <string name="preference_disconnect_sound_summary_on">Turn On the Sound.</string>
-    <string name="preference_disconnect_sound_summary_off">Do not change the sound settings.</string>
+    <string name="preference_disconnect_sound_summary_off">NO CHANGE(Default)</string>
 
     <string name="preference_vibrate_title">Vibrator</string>
 

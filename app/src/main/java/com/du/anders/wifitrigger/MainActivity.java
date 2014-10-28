@@ -71,6 +71,7 @@ public class MainActivity extends ListActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view,
                                     int position, long id) {
+                Log.i(G.LOG_TAG, "list item clicked.");
                 final String network = wifiList.get(position).SSID.replaceAll("^\"|\"$", "");
                 //String notes = (String) arg1.getTag();
                 //String version = ((TextView) arg1.findViewById(R.id.update_version)).getText().toString();
