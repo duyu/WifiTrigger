@@ -25,11 +25,11 @@ public class WifiReceiver extends BroadcastReceiver {
                 //To check the Network Name or other info:
                 WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
                 WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-                int networkId = wifiInfo.getNetworkId();
-                Log.e(G.LOG_TAG, "wifi connected: " + networkId);
+                final String wifi_id = wifiInfo.getSSID().replaceAll("^\"|\"$", "");
+                Log.i(G.LOG_TAG, "wifi connected: " + wifi_id);
                 Intent schedulerServiceIntent = new Intent(context, MainService.class);
-                schedulerServiceIntent.setAction(G.ACTION_CONDITION_MET);
-                schedulerServiceIntent.putExtra("WIFI_ID", networkId);
+                schedulerServiceIntent.setAction(G.ACTION_WIFI_CHANGED);
+                schedulerServiceIntent.putExtra("WIFI_ID", wifi_id);
                 context.startService(schedulerServiceIntent);
             }
         }

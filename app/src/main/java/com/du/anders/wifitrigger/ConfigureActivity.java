@@ -8,7 +8,11 @@ import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import com.du.anders.wifitrigger.fragments.ConnectedFragment;
 import com.du.anders.wifitrigger.fragments.DisConnectFragment;
@@ -59,11 +63,31 @@ public class ConfigureActivity extends Activity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.config_menu, menu);
+
+        final String key = mNetworkSSID + G.KEY_CONFIG_STATUS_POSTFIX;
+        Switch actionSwitch = (Switch)menu.findItem(R.id.config_switch).getActionView().findViewById(R.id.switchForActionBar);
+        actionSwitch.setChecked(((G) getApplication()).getConfigStatus(key));
+        actionSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // do something, the isChecked will be
+                // true if the switch is in the On position
+                ((G)getApplication()).setConfigStatus(key, isChecked);
+            }
+        });
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 setResult(RESULT_CANCELED);
                 finish();
+                return true;
+            case R.id.config_switch:
                 return true;
         }
         return super.onOptionsItemSelected(item);

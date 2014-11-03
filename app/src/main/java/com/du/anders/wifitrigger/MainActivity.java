@@ -52,7 +52,7 @@ public class MainActivity extends ListActivity {
 
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
-        loadWifiList();
+
     }
 
     private void loadWifiList() {
@@ -91,6 +91,7 @@ public class MainActivity extends ListActivity {
     protected void onResume() {
         if (!mIsBound)
             doBindService();
+        loadWifiList();
         super.onResume();
     }
 
@@ -159,8 +160,8 @@ public class MainActivity extends ListActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MainService.MSG_CONDITION_MET:
-                    int networkid = Integer.parseInt(msg.obj.toString());
-                    Log.e(G.LOG_TAG, networkid + "");
+                    final String wifi_id = msg.obj.toString();
+                    Log.e(G.LOG_TAG, wifi_id + "");
                 default:
                     break;
             }

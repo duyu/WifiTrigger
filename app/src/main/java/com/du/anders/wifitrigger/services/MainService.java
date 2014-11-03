@@ -30,10 +30,14 @@ public class MainService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         String action = intent == null ? null : intent.getAction();
-        if (action != null && action.equals(G.ACTION_CONDITION_MET)) {
-            if (G.DEBUG)
-                Log.e(G.LOG_TAG, "Condition met.");
-            sendMessage(MSG_CONDITION_MET, intent.getExtra("WIFI_ID"));
+        if (action != null && action.equals(G.ACTION_WIFI_CHANGED)) {
+            final String wifi_id = (String) intent.getExtra("WIFI_ID");
+            if(((G)getApplication()).getConfigStatus(wifi_id+G.KEY_CONFIG_STATUS_POSTFIX)){
+                Log.i(G.LOG_TAG, "Condition met: " + wifi_id);
+                sendMessage(MSG_CONDITION_MET, wifi_id);
+            }
+            else
+                Log.i(G.LOG_TAG, "Wifi configuration not enabled: " + wifi_id);
         }
         return super.onStartCommand(intent, flags, startId);
     }
@@ -69,7 +73,6 @@ public class MainService extends Service {
                 case MSG_CONDITION_MET:
                     for (int i = mClients.size() - 1; i >= 0; i--) {
                         try {
-                            // Let clients know there is an update available
                             mClients.get(i).send(
                                     Message.obtain(null, msg.what, msg.obj));
                         } catch (RemoteException e) {
