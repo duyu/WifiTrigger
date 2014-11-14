@@ -19,4 +19,6 @@
 
     <string name="preference_vibrate_title">Vibrator</string>
 
+    <string name="preference_sound_mode_title">Sound Mode</string>
+
 </resources>

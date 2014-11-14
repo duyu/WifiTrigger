@@ -1,4 +1,4 @@
-package com.du.anders.wifitrigger;
+package com.anders.wifitrigger;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -14,10 +14,11 @@ import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
-import com.du.anders.wifitrigger.fragments.ConnectedFragment;
-import com.du.anders.wifitrigger.fragments.DisConnectFragment;
+import com.anders.wifitrigger.fragments.ConnectedFragment;
+import com.anders.wifitrigger.fragments.DisConnectFragment;
 
 public class ConfigureActivity extends Activity {
+    private static final String LOG_TAG = ConfigureActivity.class.getSimpleName();
 
     public static final String EXTRA_NETWORK = "network";
     /**

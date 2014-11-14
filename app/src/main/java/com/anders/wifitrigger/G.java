@@ -1,4 +1,4 @@
-package com.du.anders.wifitrigger;
+package com.anders.wifitrigger;
 
 import android.app.Application;
 import android.content.SharedPreferences;
@@ -13,19 +13,14 @@ public class G extends Application {
     public static final String LOG_TAG = "WifiTrigger";
 
     //wifitrigger used for starting MainService
-    public static final String ACTION_WIFI_CHANGED = "wifi_changed";
+    public static final String ACTION_WIFI_CONNECTED = "wifi_connected";
+    public static final String ACTION_WIFI_DISCONNECT = "wifi_disconnect";
 
     public static final String KEY_CONFIG_STATUS_POSTFIX = "_config_status";
 
-    public static final String KEY_CONNECTED_SOUND_POSTFIX = "_connected_sound";
-    public static final String KEY_CONNECTED_VIBRATE_POSTFIX = "_connected_vibrator";
+    public static final String KEY_CONNECTED_SOUND_MODE_POSTFIX = "_connected_sound_mode";
+    public static final String KEY_DISCONNECT_SOUND_MODE_POSTFIX = "_disconnect_sound_mode";
 
-    public static final String KEY_DISCONNECT_SOUND_POSTFIX = "_disconnect_sound";
-    public static final String KEY_DISCONNECT_VIBRATE_POSTFIX = "_disconnect_vibrator";
-
-    public static final int PREFERENCE_CONNECTED_VIBRATE_ON = 0;
-    public static final int PREFERENCE_CONNECTED_VIBRATE_OFF = 1;
-    public static final int PREFERENCE_CONNECTED_VIBRATE_NO_CHANGE = 2;
 
     public boolean getConfigStatus(String key){
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());

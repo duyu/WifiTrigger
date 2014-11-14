@@ -1,4 +1,4 @@
-package com.du.anders.wifitrigger;
+package com.anders.wifitrigger;
 
 import android.app.ListActivity;
 import android.content.ComponentName;
@@ -18,12 +18,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.du.anders.wifitrigger.services.MainService;
+import com.anders.wifitrigger.services.MainService;
 
 import java.util.List;
 
 
 public class MainActivity extends ListActivity {
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     boolean mIsBound;
     final Messenger mMessenger = new Messenger(new IncomingHandler());
@@ -60,7 +61,7 @@ public class MainActivity extends ListActivity {
 
         if (wifiList == null)
             return;
-        Log.e(G.LOG_TAG, "::wifiList returned: " + wifiList.size());
+        Log.e(LOG_TAG, "::wifiList returned: " + wifiList.size());
 
         WifiItemAdapter adapter = new WifiItemAdapter(this, R.layout.wifi_list_item, wifiList);
 
@@ -71,7 +72,7 @@ public class MainActivity extends ListActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view,
                                     int position, long id) {
-                Log.i(G.LOG_TAG, "list item clicked.");
+                Log.i(LOG_TAG, "list item clicked.");
                 final String network = wifiList.get(position).SSID.replaceAll("^\"|\"$", "");
                 //String notes = (String) arg1.getTag();
                 //String version = ((TextView) arg1.findViewById(R.id.update_version)).getText().toString();
@@ -103,7 +104,7 @@ public class MainActivity extends ListActivity {
 
     void doBindService() {
         if (G.DEBUG)
-            Log.d(G.LOG_TAG, "bind main service");
+            Log.d(LOG_TAG, "bind main service");
         bindService(new Intent(this, MainService.class),
                 mServiceConnection, Context.BIND_AUTO_CREATE);
         mIsBound = true;
@@ -111,7 +112,7 @@ public class MainActivity extends ListActivity {
 
     ServiceConnection mServiceConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName name, IBinder service) {
-            Log.d(G.LOG_TAG, "::onServiceConnected");
+            Log.d(LOG_TAG, "::onServiceConnected");
             try {
                 // Register with the service
                 mService = new Messenger(service);
@@ -127,7 +128,7 @@ public class MainActivity extends ListActivity {
         }
 
         public void onServiceDisconnected(ComponentName name) {
-            Log.d(G.LOG_TAG, "::onServiceDisconnected");
+            Log.d(LOG_TAG, "::onServiceDisconnected");
             mService = null;
             mIsBound = false;
         }
@@ -135,7 +136,7 @@ public class MainActivity extends ListActivity {
 
     void doUnbindService() {
         if (G.DEBUG)
-            Log.d(G.LOG_TAG, "::doUnbindService");
+            Log.d(LOG_TAG, "::doUnbindService");
         if (mIsBound) {
             if (mService != null) {
                 try {
@@ -151,7 +152,7 @@ public class MainActivity extends ListActivity {
             }
             unbindService(mServiceConnection);
             mIsBound = false;
-            Log.d(G.LOG_TAG, " Service unbinding");
+            Log.d(LOG_TAG, " Service unbinding");
         }
     }
 
@@ -159,9 +160,9 @@ public class MainActivity extends ListActivity {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case MainService.MSG_CONDITION_MET:
+                case MainService.MSG_WIFI_CONNECTED:
                     final String wifi_id = msg.obj.toString();
-                    Log.e(G.LOG_TAG, wifi_id + "");
+                    Log.e(LOG_TAG, wifi_id + "");
                 default:
                     break;
             }

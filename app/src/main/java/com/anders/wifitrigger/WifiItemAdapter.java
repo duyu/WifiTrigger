@@ -1,4 +1,4 @@
-package com.du.anders.wifitrigger;
+package com.anders.wifitrigger;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,6 +17,7 @@ import java.util.List;
  * Created by anders on 14-10-13.
  */
 public class WifiItemAdapter extends ArrayAdapter<WifiConfiguration> {
+    private static final String LOG_TAG = WifiItemAdapter.class.getSimpleName();
 
     private static class ViewHolder {
         TextView name;

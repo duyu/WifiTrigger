@@ -11,5 +11,17 @@
         <item>2</item>
     </string-array>
 
+    <string-array name="preferences_sound_mode_entries">
+        <item>NO CHANGE(Default)</item>
+        <item>SILENT</item>
+        <item>ONLY Vibrate</item>
+        <item>ONLY Sound</item>
+        <item>Vibrate &amp; Sound</item>
+    </string-array>
 
+    <string-array name="preferences_sound_mode_values">
+        <item>-1</item>
+        <item>0</item>
+        <item>1</item>
+    </string-array>
 </resources>

@@ -1,4 +1,4 @@
-package com.du.anders.wifitrigger.fragments;
+package com.anders.wifitrigger.fragments;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -11,8 +11,9 @@ import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.util.Log;
 
-import com.du.anders.wifitrigger.G;
-import com.du.anders.wifitrigger.R;
+import com.anders.wifitrigger.G;
+import com.anders.wifitrigger.R;
+import com.anders.wifitrigger.executers.SoundExecutor;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,7 +23,9 @@ import com.du.anders.wifitrigger.R;
  * Use the {@link ConnectedFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ConnectedFragment extends PreferenceFragment {
+public class DisConnectFragment extends PreferenceFragment {
+    private static final String LOG_TAG = DisConnectFragment.class.getSimpleName();
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_NETWORK = "network";
@@ -39,16 +42,15 @@ public class ConnectedFragment extends PreferenceFragment {
      * @param network network SSID.
      * @return A new instance of fragment ConnectedFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static ConnectedFragment newInstance(String network) {
-        ConnectedFragment fragment = new ConnectedFragment();
+    public static DisConnectFragment newInstance(String network) {
+        DisConnectFragment fragment = new DisConnectFragment();
         Bundle args = new Bundle();
         args.putString(ARG_NETWORK, network);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public ConnectedFragment() {
+    public DisConnectFragment() {
         // Required empty public constructor
     }
 
@@ -58,7 +60,7 @@ public class ConnectedFragment extends PreferenceFragment {
         if (getArguments() != null) {
             mNetworkSSID = getArguments().getString(ARG_NETWORK);
         }
-        Log.i(G.LOG_TAG, this.getClass() + "::onCreate");
+        Log.i(LOG_TAG, this.getClass() + "::onCreate");
         this.setPreferenceScreen(createPreferenceHierarchy());
     }
 
@@ -69,27 +71,10 @@ public class ConnectedFragment extends PreferenceFragment {
 
         // category 1 created programmatically
         PreferenceCategory category = new PreferenceCategory(context);
-        category.setTitle(res.getString(R.string.preference_connect_title));
+        category.setTitle(res.getString(R.string.preference_disconnect_title));
         root.addPreference(category);
 
-        SwitchPreference switch_sound = new SwitchPreference(context);
-        switch_sound.setTitle(res.getString(R.string.preference_connect_sound_title));
-        switch_sound.setKey(mNetworkSSID + G.KEY_CONNECTED_SOUND_POSTFIX);
-        switch_sound.setSummaryOn(res.getString(R.string.preference_connect_sound_summary_on));
-        switch_sound.setSummaryOff(res.getString(R.string.preference_connect_sound_summary_off));
-        category.addPreference(switch_sound);
-
-        ListPreference list_vibrator = new ListPreference(context);
-        list_vibrator.setTitle(res.getString(R.string.preference_vibrate_title));
-        list_vibrator.setDialogTitle(res.getString(R.string.preference_vibrate_title));
-        list_vibrator.setKey(mNetworkSSID + G.KEY_CONNECTED_VIBRATE_POSTFIX);
-
-        list_vibrator.setEntries(res.getStringArray(R.array.preferences_connected_vibrator_entries));
-        list_vibrator.setEntryValues(res.getStringArray(R.array.preferences_connected_vibrator_values));
-        list_vibrator.setDefaultValue(String.valueOf(G.PREFERENCE_CONNECTED_VIBRATE_NO_CHANGE));
-        list_vibrator.setSummary("%s");//this will show the selected option as summary
-
-        category.addPreference(list_vibrator);
+        category.addPreference(SoundExecutor.getPreference(context, mNetworkSSID + G.KEY_DISCONNECT_SOUND_MODE_POSTFIX));
 
         return root;
     }//end method
@@ -98,7 +83,7 @@ public class ConnectedFragment extends PreferenceFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        Log.i(G.LOG_TAG, this.getClass() + "::onCreateView");
+        Log.i(LOG_TAG, this.getClass() + "::onCreateView");
         return inflater.inflate(R.layout.fragment_connected, container, false);
     }*/
 

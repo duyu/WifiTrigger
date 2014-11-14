@@ -1,4 +1,4 @@
-package com.du.anders.wifitrigger.services;
+package com.anders.wifitrigger.services;
 
 import android.app.Service;
 import android.content.Intent;
@@ -9,17 +9,21 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.util.Log;
 
-import com.du.anders.wifitrigger.G;
+import com.anders.wifitrigger.G;
+import com.anders.wifitrigger.executers.SoundExecutor;
 
 import java.util.ArrayList;
 
 public class MainService extends Service {
+    private static final String LOG_TAG = MainService.class.getSimpleName();
+    
     final Messenger mMessenger = new Messenger(new IncomingHandler());
 
     public static final int MSG_ZERO = 0;
     public static final int MSG_REGISTER_CLIENT = 1;
     public static final int MSG_UNREGISTER_CLIENT = 2;
-    public static final int MSG_CONDITION_MET = 3;
+    public static final int MSG_WIFI_CONNECTED = 3;
+    public static final int MSG_WIFI_DISCONNECT = 4;
 
     ArrayList<Messenger> mClients = new ArrayList<Messenger>();
 
@@ -30,14 +34,27 @@ public class MainService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         String action = intent == null ? null : intent.getAction();
-        if (action != null && action.equals(G.ACTION_WIFI_CHANGED)) {
+        if(action == null)
+            return super.onStartCommand(intent, flags, startId);
+
+        if (action.equals(G.ACTION_WIFI_CONNECTED)) {
             final String wifi_id = (String) intent.getExtra("WIFI_ID");
             if(((G)getApplication()).getConfigStatus(wifi_id+G.KEY_CONFIG_STATUS_POSTFIX)){
-                Log.i(G.LOG_TAG, "Condition met: " + wifi_id);
-                sendMessage(MSG_CONDITION_MET, wifi_id);
+                Log.i(LOG_TAG, "wifi connected: " + wifi_id);
+                sendMessage(MSG_WIFI_CONNECTED, wifi_id);
+                start_triggered_work(wifi_id, true);
             }
             else
-                Log.i(G.LOG_TAG, "Wifi configuration not enabled: " + wifi_id);
+                Log.i(LOG_TAG, "Wifi configuration not enabled: " + wifi_id);
+        } else if (action.equals(G.ACTION_WIFI_DISCONNECT)) {
+            final String wifi_id = (String) intent.getExtra("WIFI_ID");
+            if(((G)getApplication()).getConfigStatus(wifi_id+G.KEY_CONFIG_STATUS_POSTFIX)){
+                Log.i(LOG_TAG, "wifi disconnect: " + wifi_id);
+                sendMessage(MSG_WIFI_DISCONNECT, wifi_id);
+                start_triggered_work(wifi_id, false);
+            }
+            else
+                Log.i(LOG_TAG, "Wifi configuration not enabled: " + wifi_id);
         }
         return super.onStartCommand(intent, flags, startId);
     }
@@ -49,14 +66,14 @@ public class MainService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         if (G.DEBUG)
-            Log.e(G.LOG_TAG, "::onBind");
+            Log.e(LOG_TAG, "::onBind");
         return mMessenger.getBinder();
     }
 
     @Override
     public boolean onUnbind(Intent intent) {
         if (G.DEBUG)
-            Log.e(G.LOG_TAG, "::onUnBind");
+            Log.e(LOG_TAG, "::onUnBind");
         return super.onUnbind(intent);
     }
 
@@ -70,7 +87,8 @@ public class MainService extends Service {
                 case MSG_UNREGISTER_CLIENT:
                     mClients.remove(msg.replyTo);
                     break;
-                case MSG_CONDITION_MET:
+                case MSG_WIFI_CONNECTED:
+                case MSG_WIFI_DISCONNECT:
                     for (int i = mClients.size() - 1; i >= 0; i--) {
                         try {
                             mClients.get(i).send(
@@ -93,8 +111,32 @@ public class MainService extends Service {
         try {
             mMessenger.send(msg);
         } catch (RemoteException e) {
-            Log.e(G.LOG_TAG, e.getMessage(), e);
+            Log.e(LOG_TAG, e.getMessage(), e);
         }
+
+    }
+
+    /*
+    * start a thread to do the triggered work
+    * Parameter: key - the specified string we used to store
+    * */
+    private void start_triggered_work(String wifi_id, boolean isConnected) {
+        final String sound_mode_key;
+        if(isConnected)
+            sound_mode_key = wifi_id + G.KEY_CONNECTED_SOUND_MODE_POSTFIX;
+        else
+            sound_mode_key = wifi_id + G.KEY_DISCONNECT_SOUND_MODE_POSTFIX;
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                SoundExecutor soundExecutor = SoundExecutor.getInstance();
+                int soundMode = SoundExecutor.getSoundMode(getBaseContext(), sound_mode_key);
+                soundExecutor.execute(getBaseContext(), soundMode);
+
+            }
+        }).start();
 
     }
 }
