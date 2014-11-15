@@ -21,6 +21,7 @@ public class SoundExecutor extends BaseExecutor {
     private static CharSequence[] SOUND_MODE_ENTRIES = { "NO CHANGE(Default)", "SILENT", "Only Vibrate", "Only Sound", "Vibrate & Sound" };
     private static CharSequence[] SOUND_MODE_ENTRYVALUES = {"-1", "0", "1", "2", "3"};
     private static int DEFAULT_SOUND_MODE = -1;
+    private static int SOUND_MODE_COUNTS = 4;
 
     private final Ringer mSilentRinger = new Ringer(false, AudioManager.VIBRATE_SETTING_OFF,
             AudioManager.RINGER_MODE_SILENT, false);
@@ -78,7 +79,8 @@ public class SoundExecutor extends BaseExecutor {
     @Override
     public void execute(Context context, int state) {
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-        mRingers[state].execute(context);
+        if(state >= 0 && state < SOUND_MODE_COUNTS)
+            mRingers[state].execute(context);
     }
 
     private class Ringer {
