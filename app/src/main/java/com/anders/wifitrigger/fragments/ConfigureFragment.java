@@ -4,11 +4,9 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.preference.ListPreference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
-import android.preference.SwitchPreference;
 import android.util.Log;
 
 import com.anders.wifitrigger.G;
@@ -18,19 +16,21 @@ import com.anders.wifitrigger.executers.SoundExecutor;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ConnectedFragment.OnFragmentInteractionListener} interface
+ * {@link ConfigureFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ConnectedFragment#newInstance} factory method to
+ * Use the {@link ConfigureFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ConnectedFragment extends PreferenceFragment {
-    private static final String LOG_TAG = ConnectedFragment.class.getSimpleName();
+public class ConfigureFragment extends PreferenceFragment {
+    private static final String LOG_TAG = ConfigureFragment.class.getSimpleName();
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_NETWORK = "network";
+    private static final String ARG_IS_CONNECTED = "is_connected";
 
     // TODO: Rename and change types of parameters
     private String mNetworkSSID;
+    private boolean mIsConnected;
 
     //private OnFragmentInteractionListener mListener;
 
@@ -39,18 +39,19 @@ public class ConnectedFragment extends PreferenceFragment {
      * this fragment using the provided parameters.
      *
      * @param network network SSID.
-     * @return A new instance of fragment ConnectedFragment.
+     * @return A new instance of fragment ConfigureFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ConnectedFragment newInstance(String network) {
-        ConnectedFragment fragment = new ConnectedFragment();
+    public static ConfigureFragment newInstance(String network, boolean isConnected) {
+        ConfigureFragment fragment = new ConfigureFragment();
         Bundle args = new Bundle();
         args.putString(ARG_NETWORK, network);
+        args.putBoolean(ARG_IS_CONNECTED, isConnected);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public ConnectedFragment() {
+    public ConfigureFragment() {
         // Required empty public constructor
     }
 
@@ -59,24 +60,21 @@ public class ConnectedFragment extends PreferenceFragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mNetworkSSID = getArguments().getString(ARG_NETWORK);
+            mIsConnected = getArguments().getBoolean(ARG_IS_CONNECTED);
         }
         Log.i(LOG_TAG, this.getClass() + "::onCreate");
-        this.setPreferenceScreen(createPreferenceHierarchy());
+        addPreferencesFromResource(R.xml.preferences_configure);
+
+        createPreferenceHierarchy();
     }
 
-    public PreferenceScreen createPreferenceHierarchy() {
+    public void createPreferenceHierarchy() {
         Context context = this.getActivity();
-        PreferenceScreen root = getPreferenceManager().createPreferenceScreen(context);
-        Resources res = getResources();
+        PreferenceScreen root = getPreferenceScreen();
 
-        // category 1 created programmatically
-        PreferenceCategory category = new PreferenceCategory(context);
-        category.setTitle(res.getString(R.string.preference_connect_title));
-        root.addPreference(category);
+        String key = mNetworkSSID + (mIsConnected?G.KEY_CONNECTED_SOUND_MODE_POSTFIX:G.KEY_DISCONNECT_SOUND_MODE_POSTFIX);
+        root.addPreference(SoundExecutor.getPreference(context, key));
 
-        category.addPreference(SoundExecutor.getPreference(context, mNetworkSSID + G.KEY_CONNECTED_SOUND_MODE_POSTFIX));
-
-        return root;
     }//end method
 
     /*@Override

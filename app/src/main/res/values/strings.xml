@@ -7,17 +7,9 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="preference_connect_title">Connected</string>
-    <string name="preference_connect_sound_title">Silent</string>
-    <string name="preference_connect_sound_summary_on">Set to Silent.</string>
-    <string name="preference_connect_sound_summary_off">NO CHANGE(Default)</string>
+    <string name="fragment_connect_title">Connected</string>
 
-    <string name="preference_disconnect_title">DisConnected</string>
-    <string name="preference_disconnect_sound_title">Sound</string>
-    <string name="preference_disconnect_sound_summary_on">Turn On the Sound.</string>
-    <string name="preference_disconnect_sound_summary_off">NO CHANGE(Default)</string>
-
-    <string name="preference_vibrate_title">Vibrator</string>
+    <string name="fragment_disconnect_title">DisConnected</string>
 
     <string name="preference_sound_mode_title">Sound Mode</string>
 
