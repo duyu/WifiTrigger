@@ -30,7 +30,7 @@ public class BluetoothHelper extends SettingsHelper {
         final String key = getKey(wifi_id, isConnected);
         // test the new preference
         IconListPreference preference = new IconListPreference(context);
-        preference.setTitle("Sound Mode");
+        preference.setTitle(R.string.preference_bt_mode_title);
         preference.setKey(key);
         preference.setEntries(R.array.preferences_bluetooth_entries);
         preference.setEntryIcons(R.array.preferences_bluetooth_entry_icons);

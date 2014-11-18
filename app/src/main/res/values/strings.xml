@@ -12,5 +12,5 @@
     <string name="fragment_disconnect_title">DisConnected</string>
 
     <string name="preference_sound_mode_title">Sound Mode</string>
-
+    <string name="preference_bt_mode_title">Bluetooth</string>
 </resources>
