@@ -16,10 +16,17 @@ public class G extends Application {
     public static final String ACTION_WIFI_DISCONNECT = "wifi_disconnect";
 
     public static final String KEY_CONFIG_STATUS_POSTFIX = "_config_status";
+    private static final String KEY_LAST_CONNECTED_WIFI = "last_connected_wifi";
 
-    public static final String KEY_CONNECTED_SOUND_MODE_POSTFIX = "_connected_sound_mode";
-    public static final String KEY_DISCONNECT_SOUND_MODE_POSTFIX = "_disconnect_sound_mode";
 
+    public void setLastConnectedWifi(String wifi_id) {
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        mPrefs.edit().putString(KEY_LAST_CONNECTED_WIFI, wifi_id).apply();
+    }
+    public String getLastConnectedWifi() {
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        return mPrefs.getString(KEY_LAST_CONNECTED_WIFI, "");
+    }
 
     public boolean getConfigStatus(String key) {
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());

@@ -10,7 +10,7 @@ import android.os.RemoteException;
 import android.util.Log;
 
 import com.anders.wifitrigger.G;
-import com.anders.wifitrigger.executers.SoundExecutor;
+import com.anders.wifitrigger.settings.SettingsHelper;
 
 import java.util.ArrayList;
 
@@ -118,20 +118,17 @@ public class MainService extends Service {
     * start a thread to do the triggered work
     * Parameter: key - the specified string we used to store
     * */
-    private void start_triggered_work(String wifi_id, boolean isConnected) {
-        final String sound_mode_key;
-        if (isConnected)
-            sound_mode_key = wifi_id + G.KEY_CONNECTED_SOUND_MODE_POSTFIX;
-        else
-            sound_mode_key = wifi_id + G.KEY_DISCONNECT_SOUND_MODE_POSTFIX;
+    private void start_triggered_work(final String wifi_id, final boolean isConnected) {
 
         new Thread(new Runnable() {
             @Override
             public void run() {
 
-                SoundExecutor soundExecutor = SoundExecutor.getInstance();
-                int soundMode = SoundExecutor.getSoundMode(getBaseContext(), sound_mode_key);
-                soundExecutor.execute(getBaseContext(), soundMode);
+                /*SoundExecutor.getInstance().execute(getBaseContext(), wifi_id, isConnected);
+
+                BluetoothExecutor.getInstance().execute(getBaseContext(), wifi_id, isConnected);*/
+
+                SettingsHelper.execute_all(getBaseContext(), wifi_id, isConnected);
 
             }
         }).start();

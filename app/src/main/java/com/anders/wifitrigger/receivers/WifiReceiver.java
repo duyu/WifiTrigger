@@ -13,8 +13,6 @@ import com.anders.wifitrigger.services.MainService;
 public class WifiReceiver extends BroadcastReceiver {
     private static final String LOG_TAG = WifiReceiver.class.getSimpleName();
 
-    private static String last_connected_wifi_id = "";
-
     public WifiReceiver() {
     }
 
@@ -25,21 +23,22 @@ public class WifiReceiver extends BroadcastReceiver {
         String action = intent.getAction();
 
         if (action.equals(WifiManager.NETWORK_STATE_CHANGED_ACTION)) {
-
+            G gContext = (G) context.getApplicationContext();
             NetworkInfo networkInfo = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
             NetworkInfo.State state = networkInfo.getState();
 
             String wifi_id = "";
             String trigger_action = "";
+            String last_connected_wifi_id = gContext.getLastConnectedWifi();
             if (state == NetworkInfo.State.CONNECTED && last_connected_wifi_id.isEmpty()) {
                 WifiManager manager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
                 wifi_id = manager.getConnectionInfo().getSSID().replace("\"", "");
                 trigger_action = G.ACTION_WIFI_CONNECTED;
-                last_connected_wifi_id = wifi_id;
+                gContext.setLastConnectedWifi(wifi_id);
             } else if (state == NetworkInfo.State.DISCONNECTED && !last_connected_wifi_id.isEmpty()) {
                 wifi_id = last_connected_wifi_id;
                 trigger_action = G.ACTION_WIFI_DISCONNECT;
-                last_connected_wifi_id = "";
+                gContext.setLastConnectedWifi("");
                 WifiManager manager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
                 Log.i(LOG_TAG, manager.toString());
             }
@@ -47,7 +46,7 @@ public class WifiReceiver extends BroadcastReceiver {
             Log.i(LOG_TAG, wifi_id + " - " + trigger_action);
 
             if (!trigger_action.isEmpty()
-                    && ((G) context.getApplicationContext()).getConfigStatus(wifi_id + G.KEY_CONFIG_STATUS_POSTFIX)) {
+                    && gContext.getConfigStatus(wifi_id + G.KEY_CONFIG_STATUS_POSTFIX)) {
                 Intent schedulerServiceIntent = new Intent(context, MainService.class);
                 schedulerServiceIntent.setAction(trigger_action);
                 schedulerServiceIntent.putExtra("WIFI_ID", wifi_id);

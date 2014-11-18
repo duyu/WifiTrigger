@@ -83,10 +83,6 @@ public class ConfigureActivity extends Activity implements ActionBar.TabListener
 
     }
 
-    public void setActionBar() {
-
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

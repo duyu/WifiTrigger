@@ -3,13 +3,13 @@ package com.anders.wifitrigger.fragments;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 
-import com.anders.wifitrigger.G;
 import com.anders.wifitrigger.R;
-import com.anders.wifitrigger.executers.SoundExecutor;
+import com.anders.wifitrigger.settings.SettingsHelper;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,10 +69,8 @@ public class ConfigureFragment extends PreferenceFragment {
     public void createPreferenceHierarchy() {
         Context context = this.getActivity();
         PreferenceScreen root = getPreferenceScreen();
-
-        String key = mNetworkSSID + (mIsConnected ? G.KEY_CONNECTED_SOUND_MODE_POSTFIX : G.KEY_DISCONNECT_SOUND_MODE_POSTFIX);
-        root.addPreference(SoundExecutor.getPreference(context, key));
-
+        for(Preference preference : SettingsHelper.getPreferences(context, mNetworkSSID, mIsConnected))
+            root.addPreference(preference);
     }//end method
 
     /*@Override
