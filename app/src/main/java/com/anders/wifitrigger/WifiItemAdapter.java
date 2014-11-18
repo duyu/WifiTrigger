@@ -21,7 +21,7 @@ public class WifiItemAdapter extends ArrayAdapter<WifiConfiguration> {
 
     private static class ViewHolder {
         TextView name;
-//        TextView status;
+        //        TextView status;
         Switch toggleButton;
     }
 
@@ -58,12 +58,12 @@ public class WifiItemAdapter extends ArrayAdapter<WifiConfiguration> {
         final String key = wifi_id + G.KEY_CONFIG_STATUS_POSTFIX;
         viewHolder.name.setText(wifi_id);
 //        viewHolder.status.setText(wifiConfiguration.networkId + "");
-        viewHolder.toggleButton.setChecked(((G)((Activity) mContext).getApplication()).getConfigStatus(key));
+        viewHolder.toggleButton.setChecked(((G) ((Activity) mContext).getApplication()).getConfigStatus(key));
         viewHolder.toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // do something, the isChecked will be
                 // true if the switch is in the On position
-                ((G)((Activity) mContext).getApplication()).setConfigStatus(key, isChecked);
+                ((G) ((Activity) mContext).getApplication()).setConfigStatus(key, isChecked);
             }
         });
         // Return the completed view to render on screen

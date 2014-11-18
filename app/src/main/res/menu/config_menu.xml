@@ -3,5 +3,5 @@
         android:id="@+id/config_switch"
         android:title=""
         android:showAsAction="always"
-        android:actionLayout="@layout/action_switch"/>
+        android:actionLayout="@layout/action_switch" />
 </menu>

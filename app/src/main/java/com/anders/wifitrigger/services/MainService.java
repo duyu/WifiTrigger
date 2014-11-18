@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class MainService extends Service {
     private static final String LOG_TAG = MainService.class.getSimpleName();
-    
+
     final Messenger mMessenger = new Messenger(new IncomingHandler());
 
     public static final int MSG_ZERO = 0;
@@ -34,26 +34,24 @@ public class MainService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         String action = intent == null ? null : intent.getAction();
-        if(action == null)
+        if (action == null)
             return super.onStartCommand(intent, flags, startId);
 
         if (action.equals(G.ACTION_WIFI_CONNECTED)) {
             final String wifi_id = (String) intent.getExtra("WIFI_ID");
-            if(((G)getApplication()).getConfigStatus(wifi_id+G.KEY_CONFIG_STATUS_POSTFIX)){
+            if (((G) getApplication()).getConfigStatus(wifi_id + G.KEY_CONFIG_STATUS_POSTFIX)) {
                 Log.i(LOG_TAG, "wifi connected: " + wifi_id);
                 sendMessage(MSG_WIFI_CONNECTED, wifi_id);
                 start_triggered_work(wifi_id, true);
-            }
-            else
+            } else
                 Log.i(LOG_TAG, "Wifi configuration not enabled: " + wifi_id);
         } else if (action.equals(G.ACTION_WIFI_DISCONNECT)) {
             final String wifi_id = (String) intent.getExtra("WIFI_ID");
-            if(((G)getApplication()).getConfigStatus(wifi_id+G.KEY_CONFIG_STATUS_POSTFIX)){
+            if (((G) getApplication()).getConfigStatus(wifi_id + G.KEY_CONFIG_STATUS_POSTFIX)) {
                 Log.i(LOG_TAG, "wifi disconnect: " + wifi_id);
                 sendMessage(MSG_WIFI_DISCONNECT, wifi_id);
                 start_triggered_work(wifi_id, false);
-            }
-            else
+            } else
                 Log.i(LOG_TAG, "Wifi configuration not enabled: " + wifi_id);
         }
         return super.onStartCommand(intent, flags, startId);
@@ -122,7 +120,7 @@ public class MainService extends Service {
     * */
     private void start_triggered_work(String wifi_id, boolean isConnected) {
         final String sound_mode_key;
-        if(isConnected)
+        if (isConnected)
             sound_mode_key = wifi_id + G.KEY_CONNECTED_SOUND_MODE_POSTFIX;
         else
             sound_mode_key = wifi_id + G.KEY_DISCONNECT_SOUND_MODE_POSTFIX;

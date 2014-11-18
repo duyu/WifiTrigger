@@ -2,9 +2,7 @@ package com.anders.wifitrigger.fragments;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.util.Log;
@@ -72,7 +70,7 @@ public class ConfigureFragment extends PreferenceFragment {
         Context context = this.getActivity();
         PreferenceScreen root = getPreferenceScreen();
 
-        String key = mNetworkSSID + (mIsConnected?G.KEY_CONNECTED_SOUND_MODE_POSTFIX:G.KEY_DISCONNECT_SOUND_MODE_POSTFIX);
+        String key = mNetworkSSID + (mIsConnected ? G.KEY_CONNECTED_SOUND_MODE_POSTFIX : G.KEY_DISCONNECT_SOUND_MODE_POSTFIX);
         root.addPreference(SoundExecutor.getPreference(context, key));
 
     }//end method

@@ -4,7 +4,7 @@
     android:layout_height="55dp"
     android:orientation="horizontal"
     android:paddingLeft="10dp"
-    android:paddingRight="10dp" >
+    android:paddingRight="10dp">
 
     <TextView
         android:id="@+id/network_ssid"
@@ -23,7 +23,7 @@
         android:layout_centerVertical="true"
         android:focusable="false"
         android:textOn="ON"
-        android:textOff="OFF"/>
+        android:textOff="OFF" />
 
 
 </RelativeLayout>

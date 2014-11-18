@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="preferences_sound_mode_entries">
+        <item>NO CHANGE(Default)</item>
+        <item>SILENT</item>
+        <item>ONLY Vibrate</item>
+        <item>ONLY Sound</item>
+        <item>Vibrate &amp; Sound</item>
+    </string-array>
+    <string-array name="preferences_sound_mode_entry_icons">
+        <item>@drawable/stat_lock_screen_on</item>
+        <item>@drawable/stat_ring_off</item>
+        <item>@drawable/stat_phone_vibrate</item>
+        <item>@drawable/stat_ring_on</item>
+        <item>@drawable/stat_phone_ring_vibrate</item>
+    </string-array>
+    <string-array name="preferences_sound_mode_entry_values">
+        <item>-1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 
 </resources>

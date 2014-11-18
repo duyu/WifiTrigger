@@ -1,16 +1,14 @@
-
 package com.anders.wifitrigger.executers;
 
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.media.AudioManager;
-import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 
 import com.anders.wifitrigger.R;
+import com.anders.wifitrigger.preferences.IconListPreference;
 
 public class SoundExecutor extends BaseExecutor {
 
@@ -18,10 +16,7 @@ public class SoundExecutor extends BaseExecutor {
 
     private static volatile SoundExecutor INSTANCE = null;
 
-    private static CharSequence[] SOUND_MODE_ENTRIES = { "NO CHANGE(Default)", "SILENT", "Only Vibrate", "Only Sound", "Vibrate & Sound" };
-    private static CharSequence[] SOUND_MODE_ENTRYVALUES = {"-1", "0", "1", "2", "3"};
     private static int DEFAULT_SOUND_MODE = -1;
-    private static int SOUND_MODE_COUNTS = 4;
 
     private final Ringer mSilentRinger = new Ringer(false, AudioManager.VIBRATE_SETTING_OFF,
             AudioManager.RINGER_MODE_SILENT, false);
@@ -31,7 +26,7 @@ public class SoundExecutor extends BaseExecutor {
             AudioManager.RINGER_MODE_NORMAL, false);
     private final Ringer mSoundVibrateRinger = new Ringer(true, AudioManager.VIBRATE_SETTING_ON,
             AudioManager.RINGER_MODE_NORMAL, true);
-    private final Ringer[] mRingers = new Ringer[] {
+    private final Ringer[] mRingers = new Ringer[]{
             mSilentRinger, mVibrateRinger, mSoundRinger, mSoundVibrateRinger
     };
 
@@ -43,10 +38,10 @@ public class SoundExecutor extends BaseExecutor {
 
     //thread safe and performance  promote 
     public static SoundExecutor getInstance() {
-        if(INSTANCE == null){
-            synchronized(SoundExecutor.class){
+        if (INSTANCE == null) {
+            synchronized (SoundExecutor.class) {
                 //when more than two threads run into the first null check same time, to avoid instanced more than one time, it needs to be checked again.
-                if(INSTANCE == null){
+                if (INSTANCE == null) {
                     INSTANCE = new SoundExecutor();
                 }
             }
@@ -55,20 +50,16 @@ public class SoundExecutor extends BaseExecutor {
     }
 
     public static Preference getPreference(Context context, String key) {
-        Resources res = context.getResources();
-
-        ListPreference listPreference = new ListPreference(context);
-
-        listPreference.setTitle(res.getString(R.string.preference_sound_mode_title));
-        listPreference.setDialogTitle(res.getString(R.string.preference_sound_mode_title));
-        listPreference.setKey(key);
-
-        listPreference.setEntries(SOUND_MODE_ENTRIES);
-        listPreference.setEntryValues(SOUND_MODE_ENTRYVALUES);
-        listPreference.setDefaultValue(String.valueOf(DEFAULT_SOUND_MODE));
-        listPreference.setSummary("%s");//this will show the selected option as summary
-
-        return listPreference;
+        // test the new preference
+        IconListPreference preference = new IconListPreference(context);
+        preference.setTitle("Sound Mode");
+        preference.setKey(key);
+        preference.setEntries(R.array.preferences_sound_mode_entries);
+        preference.setEntryIcons(R.array.preferences_sound_mode_entry_icons);
+        preference.setEntryValues(R.array.preferences_sound_mode_entry_values);
+        preference.setDefaultValue(String.valueOf(DEFAULT_SOUND_MODE));
+        preference.setSummary("%s");
+        return preference;
     }
 
     public static int getSoundMode(Context context, String key) {
@@ -79,7 +70,7 @@ public class SoundExecutor extends BaseExecutor {
     @Override
     public void execute(Context context, int state) {
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-        if(state >= 0 && state < SOUND_MODE_COUNTS)
+        if (state >= 0 && state < mRingers.length)
             mRingers[state].execute(context);
     }
 

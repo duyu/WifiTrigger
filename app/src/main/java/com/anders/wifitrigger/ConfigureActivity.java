@@ -18,7 +18,7 @@ import android.widget.Switch;
 
 import com.anders.wifitrigger.fragments.ConfigureFragment;
 
-public class ConfigureActivity extends Activity implements ActionBar.TabListener{
+public class ConfigureActivity extends Activity implements ActionBar.TabListener {
     private static final String LOG_TAG = ConfigureActivity.class.getSimpleName();
 
     public static final String EXTRA_NETWORK = "network";
@@ -93,13 +93,13 @@ public class ConfigureActivity extends Activity implements ActionBar.TabListener
         inflater.inflate(R.menu.config_menu, menu);
 
         final String key = mNetworkSSID + G.KEY_CONFIG_STATUS_POSTFIX;
-        Switch actionSwitch = (Switch)menu.findItem(R.id.config_switch).getActionView().findViewById(R.id.switchForActionBar);
+        Switch actionSwitch = (Switch) menu.findItem(R.id.config_switch).getActionView().findViewById(R.id.switchForActionBar);
         actionSwitch.setChecked(((G) getApplication()).getConfigStatus(key));
         actionSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // do something, the isChecked will be
                 // true if the switch is in the On position
-                ((G)getApplication()).setConfigStatus(key, isChecked);
+                ((G) getApplication()).setConfigStatus(key, isChecked);
             }
         });
         return true;
