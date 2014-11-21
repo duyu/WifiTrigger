@@ -40,10 +40,9 @@ public class WifiReceiver extends BroadcastReceiver {
                 trigger_action = G.ACTION_WIFI_DISCONNECT;
                 gContext.setLastConnectedWifi("");
                 WifiManager manager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-                Log.i(LOG_TAG, manager.toString());
             }
-
-            Log.i(LOG_TAG, wifi_id + " - " + trigger_action);
+            if (G.DEBUG)
+                Log.i(LOG_TAG, wifi_id + " - " + trigger_action);
 
             if (!trigger_action.isEmpty()
                     && gContext.getConfigStatus(wifi_id)) {

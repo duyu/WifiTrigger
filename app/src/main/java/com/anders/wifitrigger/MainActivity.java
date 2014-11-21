@@ -112,13 +112,9 @@ public class MainActivity extends ListActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view,
                                     int position, long id) {
-                Log.i(LOG_TAG, "list item clicked.");
                 String network = (String) parent.getItemAtPosition(position);
-
                 Intent i = new Intent(view.getContext(), ConfigureActivity.class);
                 i.putExtra(ConfigureActivity.EXTRA_NETWORK, network);
-                //i.putExtra(ReleaseNoteActivity.KEY_BODY, (notes));
-                //i.putExtra(ReleaseNoteActivity.KEY_TITLE, version);
                 startActivity(i);
             }
 
@@ -162,7 +158,8 @@ public class MainActivity extends ListActivity {
 
     ServiceConnection mServiceConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName name, IBinder service) {
-            Log.d(LOG_TAG, "::onServiceConnected");
+            if (G.DEBUG)
+                Log.d(LOG_TAG, "::onServiceConnected");
             try {
                 // Register with the service
                 mService = new Messenger(service);
@@ -178,7 +175,8 @@ public class MainActivity extends ListActivity {
         }
 
         public void onServiceDisconnected(ComponentName name) {
-            Log.d(LOG_TAG, "::onServiceDisconnected");
+            if (G.DEBUG)
+                Log.d(LOG_TAG, "::onServiceDisconnected");
             mService = null;
             mIsBound = false;
         }
@@ -202,7 +200,6 @@ public class MainActivity extends ListActivity {
             }
             unbindService(mServiceConnection);
             mIsBound = false;
-            Log.d(LOG_TAG, " Service unbinding");
         }
     }
 
@@ -212,7 +209,8 @@ public class MainActivity extends ListActivity {
             switch (msg.what) {
                 case MainService.MSG_WIFI_CONNECTED:
                     final String wifi_id = msg.obj.toString();
-                    Log.e(LOG_TAG, wifi_id + "");
+                    if (G.DEBUG)
+                        Log.e(LOG_TAG, wifi_id + "");
                 default:
                     break;
             }

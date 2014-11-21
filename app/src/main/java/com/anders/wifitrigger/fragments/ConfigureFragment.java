@@ -58,7 +58,7 @@ public class ConfigureFragment extends PreferenceFragment {
             mNetworkSSID = getArguments().getString(ARG_NETWORK);
             mIsConnected = getArguments().getBoolean(ARG_IS_CONNECTED);
         }
-        Log.i(LOG_TAG, this.getClass() + "::onCreate");
+
         addPreferencesFromResource(R.xml.preferences_configure);
 
         createPreferenceHierarchy();

@@ -6,6 +6,8 @@ import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.anders.wifitrigger.G;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +28,8 @@ public abstract class SettingsHelper {
 
     private static void loadSettings() {
         if(LOADED_SETTINGS.isEmpty()) {
-            Log.e(LOG_TAG, "Load Settings");
+            if (G.DEBUG)
+                Log.e(LOG_TAG, "Load Settings");
             synchronized (LOADED_SETTINGS) {
                 if (LOADED_SETTINGS.isEmpty()) {
                     for (Class<? extends SettingsHelper> aSettingsHelper : SETTINGS_CLASS_LIST) {

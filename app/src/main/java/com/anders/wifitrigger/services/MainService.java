@@ -40,7 +40,8 @@ public class MainService extends Service {
         if (action.equals(G.ACTION_WIFI_CONNECTED)) {
             final String wifi_id = (String) intent.getExtra("WIFI_ID");
             if (((G) getApplication()).getConfigStatus(wifi_id)) {
-                Log.i(LOG_TAG, "wifi connected: " + wifi_id);
+                if (G.DEBUG)
+                    Log.i(LOG_TAG, "wifi connected: " + wifi_id);
                 sendMessage(MSG_WIFI_CONNECTED, wifi_id);
                 start_triggered_work(wifi_id, true);
             } else
@@ -48,7 +49,8 @@ public class MainService extends Service {
         } else if (action.equals(G.ACTION_WIFI_DISCONNECT)) {
             final String wifi_id = (String) intent.getExtra("WIFI_ID");
             if (((G) getApplication()).getConfigStatus(wifi_id)) {
-                Log.i(LOG_TAG, "wifi disconnect: " + wifi_id);
+                if (G.DEBUG)
+                    Log.i(LOG_TAG, "wifi disconnect: " + wifi_id);
                 sendMessage(MSG_WIFI_DISCONNECT, wifi_id);
                 start_triggered_work(wifi_id, false);
             } else
