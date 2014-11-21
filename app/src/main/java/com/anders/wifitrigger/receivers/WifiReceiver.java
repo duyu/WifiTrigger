@@ -46,7 +46,7 @@ public class WifiReceiver extends BroadcastReceiver {
             Log.i(LOG_TAG, wifi_id + " - " + trigger_action);
 
             if (!trigger_action.isEmpty()
-                    && gContext.getConfigStatus(wifi_id + G.KEY_CONFIG_STATUS_POSTFIX)) {
+                    && gContext.getConfigStatus(wifi_id)) {
                 Intent schedulerServiceIntent = new Intent(context, MainService.class);
                 schedulerServiceIntent.setAction(trigger_action);
                 schedulerServiceIntent.putExtra("WIFI_ID", wifi_id);

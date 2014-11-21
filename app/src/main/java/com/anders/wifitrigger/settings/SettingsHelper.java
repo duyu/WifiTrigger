@@ -29,17 +29,18 @@ public abstract class SettingsHelper {
             Log.e(LOG_TAG, "Load Settings");
             synchronized (LOADED_SETTINGS) {
                 if (LOADED_SETTINGS.isEmpty()) {
-                    for (Class<? extends SettingsHelper> aSettingsList : SETTINGS_CLASS_LIST) {
+                    for (Class<? extends SettingsHelper> aSettingsHelper : SETTINGS_CLASS_LIST) {
                         try {
-                            LOADED_SETTINGS.add(aSettingsList.newInstance());
+                            LOADED_SETTINGS.add(aSettingsHelper.newInstance());
                         } catch (Exception e) {
-                            Log.e(LOG_TAG, "Error loading settings: " + aSettingsList.getSimpleName());
+                            Log.e(LOG_TAG, "Error loading settings: " + aSettingsHelper.getSimpleName());
                         }
                     }
                 }
             }
         }
     }
+
     public static List<Preference> getPreferences(Context context, String wifi_id, boolean isConnected) {
         loadSettings();
         List<Preference> preference_list = new ArrayList<Preference>();
@@ -48,6 +49,7 @@ public abstract class SettingsHelper {
         }
         return preference_list;
     }
+
     public static void execute_all(Context context, String wifi_id, boolean isConnected) {
         loadSettings();
         for(SettingsHelper item : LOADED_SETTINGS) {
@@ -55,6 +57,16 @@ public abstract class SettingsHelper {
         }
     }
 
+    public static void delWifiData(Context context, String wifi_id) {
+        loadSettings();
+        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+
+        for(SettingsHelper item: LOADED_SETTINGS) {
+            editor.remove(item.getKey(wifi_id, true));
+            editor.remove(item.getKey(wifi_id, false));
+        }
+        editor.apply();
+    }
 
     protected int getCurrentMode(Context context, String wifi_id, boolean isConnected) {
         final String key = getKey(wifi_id, isConnected);
@@ -65,4 +77,6 @@ public abstract class SettingsHelper {
     protected abstract String getKey(String wifi_id, boolean isConnected);
     protected abstract Preference getPreference(Context context, String wifi_id, boolean isConnected);
     protected abstract void execute(Context context, String wifi_id, boolean isConnected);
+
+
 }

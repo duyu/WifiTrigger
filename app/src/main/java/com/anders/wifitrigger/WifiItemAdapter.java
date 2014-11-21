@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by anders on 14-10-13.
  */
-public class WifiItemAdapter extends ArrayAdapter<WifiConfiguration> {
+public class WifiItemAdapter extends ArrayAdapter<String> {
     private static final String LOG_TAG = WifiItemAdapter.class.getSimpleName();
 
     private static class ViewHolder {
@@ -29,7 +29,7 @@ public class WifiItemAdapter extends ArrayAdapter<WifiConfiguration> {
     int mLayoutResourceId;
 
 
-    public WifiItemAdapter(Context mContext, int layoutResourceId, List<WifiConfiguration> wifiList) {
+    public WifiItemAdapter(Context mContext, int layoutResourceId, List<String> wifiList) {
         super(mContext, layoutResourceId, wifiList);
         this.mLayoutResourceId = layoutResourceId;
         this.mContext = mContext;
@@ -38,7 +38,7 @@ public class WifiItemAdapter extends ArrayAdapter<WifiConfiguration> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        WifiConfiguration wifiConfiguration = getItem(position);
+        final String wifi_id = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         ViewHolder viewHolder; // view lookup cache stored in tag
         if (convertView == null) {
@@ -54,16 +54,14 @@ public class WifiItemAdapter extends ArrayAdapter<WifiConfiguration> {
         }
         // Lookup view for data population
         // Populate the data into the template view using the data object
-        final String wifi_id = wifiConfiguration.SSID.replaceAll("^\"|\"$", "");
-        final String key = wifi_id + G.KEY_CONFIG_STATUS_POSTFIX;
         viewHolder.name.setText(wifi_id);
 //        viewHolder.status.setText(wifiConfiguration.networkId + "");
-        viewHolder.toggleButton.setChecked(((G) ((Activity) mContext).getApplication()).getConfigStatus(key));
+        viewHolder.toggleButton.setChecked(((G) ((Activity) mContext).getApplication()).getConfigStatus(wifi_id));
         viewHolder.toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // do something, the isChecked will be
                 // true if the switch is in the On position
-                ((G) ((Activity) mContext).getApplication()).setConfigStatus(key, isChecked);
+                ((G) ((Activity) mContext).getApplication()).setConfigStatus(wifi_id, isChecked);
             }
         });
         // Return the completed view to render on screen

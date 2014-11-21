@@ -26,7 +26,6 @@ public class ConfigureFragment extends PreferenceFragment {
     private static final String ARG_NETWORK = "network";
     private static final String ARG_IS_CONNECTED = "is_connected";
 
-    // TODO: Rename and change types of parameters
     private String mNetworkSSID;
     private boolean mIsConnected;
 
@@ -39,7 +38,6 @@ public class ConfigureFragment extends PreferenceFragment {
      * @param network network SSID.
      * @return A new instance of fragment ConfigureFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static ConfigureFragment newInstance(String network, boolean isConnected) {
         ConfigureFragment fragment = new ConfigureFragment();
         Bundle args = new Bundle();

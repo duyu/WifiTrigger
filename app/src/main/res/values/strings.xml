@@ -5,7 +5,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_wifi_remembered">"There's no WIFI info stored in your device."</string>
+    <string name="wifi_not_enabled">Wifi not enabled, Click to enable it.</string>
 
     <string name="fragment_connect_title">Connected</string>
 

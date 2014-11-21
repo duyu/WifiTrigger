@@ -88,14 +88,13 @@ public class ConfigureActivity extends Activity implements ActionBar.TabListener
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.config_menu, menu);
 
-        final String key = mNetworkSSID + G.KEY_CONFIG_STATUS_POSTFIX;
         Switch actionSwitch = (Switch) menu.findItem(R.id.config_switch).getActionView().findViewById(R.id.switchForActionBar);
-        actionSwitch.setChecked(((G) getApplication()).getConfigStatus(key));
+        actionSwitch.setChecked(((G) getApplication()).getConfigStatus(mNetworkSSID));
         actionSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // do something, the isChecked will be
                 // true if the switch is in the On position
-                ((G) getApplication()).setConfigStatus(key, isChecked);
+                ((G) getApplication()).setConfigStatus(mNetworkSSID, isChecked);
             }
         });
         return true;
