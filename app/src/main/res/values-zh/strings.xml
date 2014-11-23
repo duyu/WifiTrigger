@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">WifiTrigger</string>
+
+    <string name="no_wifi_remembered">"本地没有存储的WIFI信息，请先配置WIFI。"</string>
+    <string name="wifi_not_enabled">"WIFI处于关闭状态，请点击此处打开WIFI。"</string>
+
+    <string name="fragment_connect_title">连接</string>
+
+    <string name="fragment_disconnect_title">断开</string>
+
+    <string name="preference_sound_mode_title">情景模式</string>
+    <string name="preference_bt_mode_title">蓝牙</string>
+</resources>

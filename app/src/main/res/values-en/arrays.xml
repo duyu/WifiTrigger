@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="preferences_sound_mode_entries">
+        <item>NO CHANGE(Default)</item>
+        <item>SILENT</item>
+        <item>ONLY Vibrate</item>
+        <item>ONLY Sound</item>
+        <item>Vibrate &amp; Sound</item>
+    </string-array>
+
+
+    <string-array name="preferences_bluetooth_entries">
+        <item>NO CHANGE(Default)</item>
+        <item>OFF</item>
+        <item>ON</item>
+    </string-array>
+</resources>
