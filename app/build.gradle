@@ -5,7 +5,7 @@ android {
     buildToolsVersion '19.1.0'
 
     defaultConfig {
-        applicationId "com.du.anders.wifitrigger"
+        applicationId "com.letsgo.wifitrigger"
         minSdkVersion 15
         targetSdkVersion 20
         versionCode 1

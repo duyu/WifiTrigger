@@ -1,4 +1,4 @@
-package com.anders.wifitrigger;
+package com.letsgo.wifitrigger;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
@@ -16,7 +16,7 @@ import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
-import com.anders.wifitrigger.fragments.ConfigureFragment;
+import com.letsgo.wifitrigger.fragments.ConfigureFragment;
 
 public class ConfigureActivity extends Activity implements ActionBar.TabListener {
     private static final String LOG_TAG = ConfigureActivity.class.getSimpleName();

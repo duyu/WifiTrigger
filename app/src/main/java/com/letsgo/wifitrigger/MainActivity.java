@@ -1,4 +1,4 @@
-package com.anders.wifitrigger;
+package com.letsgo.wifitrigger;
 
 import android.app.ListActivity;
 import android.content.BroadcastReceiver;
@@ -23,7 +23,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.anders.wifitrigger.services.MainService;
+import com.letsgo.wifitrigger.services.MainService;
 
 import java.util.ArrayList;
 import java.util.HashSet;

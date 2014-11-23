@@ -1,4 +1,4 @@
-package com.anders.wifitrigger.services;
+package com.letsgo.wifitrigger.services;
 
 import android.app.Service;
 import android.content.Intent;
@@ -9,8 +9,8 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.util.Log;
 
-import com.anders.wifitrigger.G;
-import com.anders.wifitrigger.settings.SettingsHelper;
+import com.letsgo.wifitrigger.G;
+import com.letsgo.wifitrigger.settings.SettingsHelper;
 
 import java.util.ArrayList;
 

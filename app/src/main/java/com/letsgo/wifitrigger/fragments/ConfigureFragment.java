@@ -1,4 +1,4 @@
-package com.anders.wifitrigger.fragments;
+package com.letsgo.wifitrigger.fragments;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -8,8 +8,8 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 
-import com.anders.wifitrigger.R;
-import com.anders.wifitrigger.settings.SettingsHelper;
+import com.letsgo.wifitrigger.R;
+import com.letsgo.wifitrigger.settings.SettingsHelper;
 
 /**
  * A simple {@link Fragment} subclass.

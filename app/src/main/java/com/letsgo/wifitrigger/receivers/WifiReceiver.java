@@ -1,4 +1,4 @@
-package com.anders.wifitrigger.receivers;
+package com.letsgo.wifitrigger.receivers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -7,8 +7,8 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
-import com.anders.wifitrigger.G;
-import com.anders.wifitrigger.services.MainService;
+import com.letsgo.wifitrigger.G;
+import com.letsgo.wifitrigger.services.MainService;
 
 public class WifiReceiver extends BroadcastReceiver {
     private static final String LOG_TAG = WifiReceiver.class.getSimpleName();

@@ -1,10 +1,10 @@
-package com.anders.wifitrigger;
+package com.letsgo.wifitrigger;
 
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.anders.wifitrigger.settings.SettingsHelper;
+import com.letsgo.wifitrigger.settings.SettingsHelper;
 
 import java.util.HashSet;
 import java.util.Set;

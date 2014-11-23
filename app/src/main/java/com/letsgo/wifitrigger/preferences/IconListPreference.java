@@ -1,4 +1,4 @@
-package com.anders.wifitrigger.preferences;
+package com.letsgo.wifitrigger.preferences;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.anders.wifitrigger.R;
+import com.letsgo.wifitrigger.R;
 
 /**
  * Created by anders on 14-11-18.

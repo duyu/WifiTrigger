@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.anders.wifitrigger">
+    package="com.letsgo.wifitrigger">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -9,13 +9,13 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
 
     <application
-        android:name="com.anders.wifitrigger.G"
+        android:name="com.letsgo.wifitrigger.G"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.anders.wifitrigger.MainActivity"
+            android:name="com.letsgo.wifitrigger.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,11 +25,11 @@
         </activity>
 
         <activity
-            android:name="com.anders.wifitrigger.ConfigureActivity"
+            android:name="com.letsgo.wifitrigger.ConfigureActivity"
             android:label="@string/app_name"/>
 
         <receiver
-            android:name="com.anders.wifitrigger.receivers.WifiReceiver"
+            android:name="com.letsgo.wifitrigger.receivers.WifiReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter android:priority="100">
@@ -38,7 +38,7 @@
         </receiver>
 
         <service
-            android:name="com.anders.wifitrigger.services.MainService"
+            android:name="com.letsgo.wifitrigger.services.MainService"
             android:enabled="true"/>
     </application>
 

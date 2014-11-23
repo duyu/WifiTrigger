@@ -1,12 +1,12 @@
-package com.anders.wifitrigger.settings;
+package com.letsgo.wifitrigger.settings;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.preference.Preference;
 
-import com.anders.wifitrigger.R;
-import com.anders.wifitrigger.preferences.IconListPreference;
+import com.letsgo.wifitrigger.R;
+import com.letsgo.wifitrigger.preferences.IconListPreference;
 
 /**
  * Created by anders on 14-11-18.

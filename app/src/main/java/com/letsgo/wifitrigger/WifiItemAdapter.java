@@ -1,4 +1,4 @@
-package com.anders.wifitrigger;
+package com.letsgo.wifitrigger;
 
 import android.app.Activity;
 import android.content.Context;
