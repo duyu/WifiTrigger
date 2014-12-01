@@ -7,14 +7,14 @@
         <item>ONLY Sound</item>
         <item>Vibrate &amp; Sound</item>
     </string-array>
-    <string-array name="preferences_sound_mode_entry_icons">
+    <string-array name="preferences_sound_mode_entry_icons" translatable="false">
         <item>@drawable/stat_lock_screen_on</item>
         <item>@drawable/stat_ring_off</item>
         <item>@drawable/stat_phone_vibrate</item>
         <item>@drawable/stat_ring_on</item>
         <item>@drawable/stat_phone_ring_vibrate</item>
     </string-array>
-    <string-array name="preferences_sound_mode_entry_values">
+    <string-array name="preferences_sound_mode_entry_values"  translatable="false">
         <item>-1</item>
         <item>0</item>
         <item>1</item>
@@ -27,12 +27,12 @@
         <item>OFF</item>
         <item>ON</item>
     </string-array>
-    <string-array name="preferences_bluetooth_entry_icons">
+    <string-array name="preferences_bluetooth_entry_icons" translatable="false">
         <item>@drawable/stat_lock_screen_on</item>
         <item>@drawable/stat_bt_off</item>
         <item>@drawable/stat_bt_on</item>
     </string-array>
-    <string-array name="preferences_bluetooth_entry_values">
+    <string-array name="preferences_bluetooth_entry_values"  translatable="false">
         <item>-1</item>
         <item>0</item>
         <item>1</item>
