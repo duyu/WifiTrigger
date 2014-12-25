@@ -38,7 +38,7 @@ public class MainService extends Service {
             return super.onStartCommand(intent, flags, startId);
 
         if (action.equals(G.ACTION_WIFI_CONNECTED)) {
-            final String wifi_id = (String) intent.getExtra("WIFI_ID");
+            final String wifi_id = intent.getStringExtra("WIFI_ID");
             if (((G) getApplication()).getConfigStatus(wifi_id)) {
                 if (G.DEBUG)
                     Log.i(LOG_TAG, "wifi connected: " + wifi_id);
@@ -47,7 +47,7 @@ public class MainService extends Service {
             } else
                 Log.i(LOG_TAG, "Wifi configuration not enabled: " + wifi_id);
         } else if (action.equals(G.ACTION_WIFI_DISCONNECT)) {
-            final String wifi_id = (String) intent.getExtra("WIFI_ID");
+            final String wifi_id = intent.getStringExtra("WIFI_ID");
             if (((G) getApplication()).getConfigStatus(wifi_id)) {
                 if (G.DEBUG)
                     Log.i(LOG_TAG, "wifi disconnect: " + wifi_id);

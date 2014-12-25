@@ -13,7 +13,7 @@ import java.util.Set;
  * Created by anders on 14-10-13.
  */
 public class G extends Application {
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
     public static final String LOG_TAG = "WifiTrigger";
 
     //wifitrigger used for starting MainService

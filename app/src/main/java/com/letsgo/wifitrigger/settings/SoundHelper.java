@@ -3,6 +3,7 @@ package com.letsgo.wifitrigger.settings;
 import android.content.Context;
 import android.media.AudioManager;
 import android.preference.Preference;
+import android.util.Log;
 
 import com.letsgo.wifitrigger.R;
 import com.letsgo.wifitrigger.preferences.IconListPreference;
@@ -11,6 +12,8 @@ import com.letsgo.wifitrigger.preferences.IconListPreference;
  * Created by anders on 14-11-18.
  */
 public class SoundHelper extends SettingsHelper {
+    private static final String LOG_TAG = SoundHelper.class.getSimpleName();
+
     private static final String KEY_CONNECTED_SOUND_MODE_POSTFIX = "_connected_sound_mode";
     private static final String KEY_DISCONNECT_SOUND_MODE_POSTFIX = "_disconnect_sound_mode";
 
@@ -45,6 +48,7 @@ public class SoundHelper extends SettingsHelper {
         int state = getCurrentMode(context, wifi_id, isConnected);
         AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         int mVibrateSetting, mRingerMode;
+        Log.i(LOG_TAG, "Toggle Sound: " + state);
         switch (state) {
             case -1:
                 return;
@@ -57,10 +61,10 @@ public class SoundHelper extends SettingsHelper {
                 mRingerMode = AudioManager.RINGER_MODE_VIBRATE;
                 break;
             case 2:
-                mVibrateSetting = AudioManager.VIBRATE_SETTING_ONLY_SILENT;
+                mVibrateSetting = AudioManager.VIBRATE_SETTING_OFF;
                 mRingerMode = AudioManager.RINGER_MODE_NORMAL;
                 break;
-            case 4:
+            case 3:
                 mVibrateSetting = AudioManager.VIBRATE_SETTING_ON;
                 mRingerMode = AudioManager.RINGER_MODE_NORMAL;
                 break;

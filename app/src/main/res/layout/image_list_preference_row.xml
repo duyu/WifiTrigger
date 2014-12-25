@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/image_list_view_row_table_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:paddingLeft="6dip"
+    android:paddingRight="?android:attr/scrollbarSize" >
+
+    <ImageView
+        android:id="@+id/image_list_view_row_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/round_bg" />
+
+    <TextView
+        android:id="@+id/image_list_view_row_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/image_list_view_row_icon"
+        android:layout_toEndOf="@id/image_list_view_row_icon"
+        android:ellipsize="end"
+        android:layout_marginRight="40dip"
+        android:layout_marginEnd="40dip"
+        android:singleLine="true"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <RadioButton
+        android:id="@+id/image_list_view_row_radio_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:checked="false" />
+</RelativeLayout>
